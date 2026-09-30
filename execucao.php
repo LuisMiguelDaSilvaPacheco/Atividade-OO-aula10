@@ -1,9 +1,10 @@
 <?php
 
-require_once('modelo/Espadachim');
-require_once('modelo/Mago');
-require_once('modelo/Tank');
-require_once('modelo/Vitalista');
+require_once('modelo/Aventureiro.php');
+require_once('modelo/Espadachim.php');
+require_once('modelo/Mago.php');
+require_once('modelo/Tank.php');
+require_once('modelo/Vitalista.php');
 
 $jogador = new Aventureiro;
 
@@ -46,8 +47,10 @@ switch ($classe) {
 }
 } while ($classe < 1 or $classe > 4 );
 
-$jogador;
-
+$jogador->setNome(readline('Qual será o seu nome? '));
+$jogador->setNivel(1);
+$jogador->setExperiencia(1);
+$jogador->setVidaMaxima(100);
 
 // Fim da seleção de personagem, inicio do jogo
 do {
