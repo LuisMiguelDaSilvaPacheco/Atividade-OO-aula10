@@ -60,6 +60,14 @@ switch ($classe) {
         $jogador->setDanoMagico(rand(1, 10));
         break;
 
+    case 3:
+        printM("Em construção...\n", 50);
+        break;
+
+    case 4:
+        printM("Em construção...\n", 50);
+        break;
+
     case 0:
         printM("Saindo...\n", 50);
         system('clear');
@@ -69,7 +77,7 @@ switch ($classe) {
         printM("Resposta inválida, tente novamente...\n", 50);
         break;
 }
-} while ($classe < 1 or $classe > 4 );
+} while ($classe < 1 or $classe > 2 );
 
 $jogador->setNome(readline('Qual será o seu nome? '));
 $jogador->setNivel(1);
@@ -83,15 +91,21 @@ do {
     $opcao = readline();
     print "\n\n";
     switch ($opcao) {
+
         case 1:
-            if($jogador->getNivel >= 10){
+            printM($jogador, 50);
+            readline('Pressione ENTER');
+            break;
+
+        case 2:
+            if($jogador->getNivel() >= 10){
 				$jogador->setMonstro($monstros[rand(0, 2)]);
-			}else if($jogador->getNivel >= 5){
+			}else if($jogador->getNivel() >= 5){
 				$jogador->setMonstro($monstros[rand(0, 1)]);
 			}else{
 				$jogador->setMonstro($monstros[0]);
 			}
-			$jogador->batalhar()
+			$jogador->Batalhar($jogador->getMonstro(), $classe);
             break;
         
         case 0:
@@ -104,47 +118,6 @@ do {
     }
 
 } while ($opcao <= 10);
-
-
-function menuBatalha($classe){
-    switch ($classe) {
-        case 'mago':
-            $menu = "\n\n
-        ************************************
-        *               Mago               *
-        ************************************
-        * 1- Ataque básico                 *
-        * 2- Ataque pesado                 *
-        * 2- Verificar vida                *
-        ************************************
-        * 0- Sair                          *
-        ************************************\n";
-            break;
-
-        case 'espadachim':
-            $menu = "\n\n
-        ************************************
-        *            Espadachim            *
-        ************************************
-        * 1- Ataque básico                 *
-        * 2- Ataque pesado                 *
-        * 2- Verificar vida                *
-        ************************************
-        * 0- Sair                          *
-        ************************************\n";
-            break;
-        
-        case 0:
-            print "Saindo...\n";
-            break;
-        
-        default:
-            print "Resposta inválida, tente novamente...\n";
-            break;
-    }
-	return $menu;
-    
-}
 
 function menu(){
     $menu = "\n\n
