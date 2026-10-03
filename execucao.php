@@ -3,39 +3,42 @@
 require_once('modelo/Aventureiro.php');
 require_once('modelo/Espadachim.php');
 require_once('modelo/Mago.php');
-require_once('modelo/Tank.php');
-require_once('modelo/Vitalista.php');
-require_once('modelo/Monstro.php');
+// require_once('modelo/Tank.php');
+// require_once('modelo/Vitalista.php');
+// require_once('modelo/Monstro.php');
 
 // Criação dos monstros
 
 $monstros = array();
 
 $monstro1 = new Monstro();
-$monstro1->setRaca("Gnoll");
-$monstro1->setVidaMaxima(120);
-$monstro1->setDano(7);
+$monstro1->setRaca("Slime");
+$monstro1->setVidaMaxima(70);
+$monstro1->setVidaAtual(70);
+$monstro1->setDano(3);
 array_push($monstros, $monstro1);
 
 $monstro2 = new Monstro();
 $monstro2->setRaca("Goblin");
 $monstro2->setVidaMaxima(100);
+$monstro2->setVidaAtual(100);
 $monstro2->setDano(5);
 array_push($monstros, $monstro2);
 
 $monstro3 = new Monstro();
-$monstro3->setRaca("Slime");
-$monstro3->setVidaMaxima(70);
-$monstro3->setDano(3);
+$monstro3->setRaca("Gnoll");
+$monstro3->setVidaMaxima(120);
+$monstro3->setVidaAtual(120);
+$monstro3->setDano(7);
 array_push($monstros, $monstro3);
 
 // Criação de personagem
 $jogador = new Aventureiro;
 
-do {
 
 printM("Bem-vindo(a) ao RPG No Dungeons Nor Dragons (ou NDND para os mais próximos)\n", 50);
-sleep(1);
+readline('Pressione ENTER');
+do {
 print "\n\n
         ************************************
         *        Escolha sua classe        *
@@ -52,12 +55,12 @@ switch ($classe) {
 
     case 1:
         $jogador = new Espadachim;
-        $jogador->setDanoFisico(rand(1, 10));
+        $jogador->setDanoFisico(rand(3, 5));
         break;
 
     case 2:
         $jogador = new Mago;
-        $jogador->setDanoMagico(rand(1, 10));
+        $jogador->setDanoMagico(rand(3, 5));
         break;
 
     case 3:
@@ -79,7 +82,8 @@ switch ($classe) {
 }
 } while ($classe < 1 or $classe > 2 );
 
-$jogador->setNome(readline('Qual será o seu nome? '));
+printM('Qual será o seu nome? ', 50);
+$jogador->setNome(readline(/*Qual será o seu nome? */));
 $jogador->setNivel(1);
 $jogador->setExperiencia(1);
 $jogador->setVidaMaxima(100);
@@ -105,19 +109,24 @@ do {
 			}else{
 				$jogador->setMonstro($monstros[0]);
 			}
-			$jogador->Batalhar($jogador->getMonstro(), $classe);
+
+            if ($jogador instanceof Espadachim) {
+                $jogador->Batalhar($classe, $jogador->getDanoFisico());
+            } else if ($jogador instanceof Mago) {
+                $jogador->Batalhar($classe, $jogador->getDanoMagico());
+            }
             break;
         
         case 0:
-            print "Saindo...\n";
-            break;
+            printM("Saindo...\n", 50);
+            die();
         
         default:
-            print "Resposta inválida, tente novamente...\n";
+            printM("Resposta inválida, tente novamente...\n", 50);
             break;
     }
 
-} while ($opcao <= 10);
+} while ($opcao <= 1 or $opcao >= 2);
 
 function menu(){
     $menu = "\n\n
