@@ -3,7 +3,7 @@
 require_once('Aventureiro.php');
 
 class Mago extends Combatente{
-    protected $danoMagico;
+    protected int $danoMagico;
 
     public function getDanoMagico()
     {

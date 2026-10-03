@@ -2,7 +2,7 @@
 
 class Monstro {
 	private string $raca;
-	private int $vidaMax;
+	private int $vidaMaxima;
 	private int $vidaAtual;
 	private int $dano;
 
@@ -22,12 +22,12 @@ class Monstro {
 	    $this->dano = $dano;
 	}
 
-	public function getVidaMax() {
-	    return $this->vidaMax;
+	public function getVidaMaxima() {
+	    return $this->vidaMaxima;
 	}
 
-	public function setVidaMax($vidaMax) {
-	    $this->vidaMax = $vidaMax;
+	public function setVidaMaxima($vidaMaxima) {
+	    $this->vidaMaxima = $vidaMaxima;
 	}
 
 	public function getVidaAtual() {
